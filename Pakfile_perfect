@@ -1,0 +1,20 @@
+#NAME
+SuperContainer
+
+#USR
+Kriminetskiy
+
+#NET
+
+
+#RUN
+echo THIS IS DONE IN CHILD POCKERFILE :
+ip link
+ifconfig
+bash
+
+#ENV
+HMD={$HOME}
+
+#ISO
+.

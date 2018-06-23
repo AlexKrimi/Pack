@@ -1,0 +1,7 @@
+#
+#
+echo THIS IS DONE IN CHILD POCKERFILE :
+ip link
+#ifconfig
+#bash
+echo finish
