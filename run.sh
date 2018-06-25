@@ -1,4 +1,4 @@
 #/bin/bash
-gcc -w -o container main.c
+gcc -w -Wall App/PackReader/PackReader.c main.c -o container
 chmod +x container
 ./container

@@ -1,7 +1,14 @@
-#
-#
-echo THIS IS DONE IN CHILD POCKERFILE :
-ip link
-#ifconfig
-#bash
+#NAME
+Pack.
+#NET
+10.1.1.1/24
+10.1.1.2/24
+#ISO
+/home/alex/Workspace/Pack/
+#RUN
+echo THIS IS DONE IN CHILD PACKFILE :
+apt -y install net-tools
+ifconfig
+#ps aux
+bash
 echo finish
