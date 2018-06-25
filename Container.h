@@ -6,3 +6,11 @@
 #define PACK_CONTAINER_H
 
 #endif //PACK_CONTAINER_H
+
+
+struct Container{
+    int network;
+    int isolate;
+    char* name;
+    char* user;
+};

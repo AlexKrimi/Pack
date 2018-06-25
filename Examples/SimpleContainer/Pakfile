@@ -5,7 +5,7 @@ SuperContainer
 Kriminetskiy
 
 #NET
-
+ip link add name veth0 type veth peer name veth1 netns <pid>
 
 #RUN
 echo THIS IS DONE IN CHILD POCKERFILE :

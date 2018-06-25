@@ -1,34 +1,82 @@
-#include "PackReader.h"
+#include "App/PackReader/PackReader.h"
+#include "Container.h"
 
 static char child_stack[STACK_SIZE];
 
 static int child_fn(void) {
-    printf("Clone internal PID: %ld\n", (long) getpid());
+//    printf("Clone internal PID: %ld\n", (long) getpid());
     pid_t child_pid = fork();
+    system("mount -t proc proc /proc --make-private");
+
     if (child_pid) {
-        printf("Clone fork child PID: %ld\n", (long) child_pid);
+
+        int pack_read_mode = 1;
+        int mode_changed = 0;
 
         FILE *fp;
 
         char *line = NULL;
         size_t len = 0;
         ssize_t read;
-
         fp = fopen("Packfile", "r");
         if (fp == NULL)
             exit(EXIT_FAILURE);
 
+
+        Container container = malloc(sizeof(Container));
+
         while ((read = getline(&line, &len, fp)) != -1) {
-            if (strncmp(line, "#bash", strlen("#bash")) == 0){
-                printf("@@@@@@@@@@@@@@@@@@@@@@@@@  %s\n", line);
+            if (switch_mode(line) >= 0)
+                pack_read_mode = switch_mode(line);
+            switch (pack_read_mode) {
+                case ISO_MODE: {
+                    container.isolate = 1;
+                    system("dd if=/dev/zero of=/home/alex/Workspace/Pack/container_main.img bs=1M count=1024");
+
+                    system("losetup /dev/loop7 container_main.img");
+                    system("mkfs.ext4 /home/alex/Workspace/Pack/container_main.img 100");
+
+                    system("touch /home/alex/Workspace/Pack/container_main.img");
+s
+                    system("mount -t ext4 /dev/loop7 /home/alex/Workspace/Pack/container_main.img");
+                    break;
+                }
+                case NET_MODE: {
+                    system("ip link");
+                    system("ifconfig veth1 10.1.1.2/24 up");
+                    break;
+                }
+
+                case RUN_MODE: {
+                    system(line);
+                    break;
+                }
+
+                case NAME_MODE: {
+
+                    break;
+                }
+
+                case USR_MODE: {
+
+                    break;
+                }
+
+                case ENV_MODE: {
+
+                    break;
+                }
             }
-            system(line);
+
         }
         fclose(fp);
 
-
-
+//        char argv[100];
+//        char env[100];
+//        execve("/bin/bash", argv, env);
     } else {
+        waitpid(child_pid, NULL, 0);
+        system("umount /proc");
         printf("PARENT PROCESS");
     }
     _exit(EXIT_SUCCESS);
@@ -38,72 +86,16 @@ static int child_fn(void) {
 int main(void) {
     pid_t child_pid = clone(child_fn, child_stack + STACK_SIZE, CLONE_NEWPID | CLONE_NEWNS | CLONE_NEWNET | SIGCHLD,
                             NULL);
-    printf("clone() = %ld\n", (long) child_pid);
-//    system("mount --make-private -o remount /");
-//    system("mount -t proc proc /proc --make-private");
+
+    char str[256];
+    strcpy(str, "ip link add name veth0 type veth peer name veth1 netns ");
+    char buffer[16];
+    snprintf(buffer, 10, "%d", child_pid);
+    strcat(str, buffer);
+    system(str);
+
+    system("ifconfig veth0 10.1.1.1/24 up");
+
     waitpid(child_pid, NULL, 0);
-//    system("mount --make-private -o remount /");
-//    system("umount /proc");
     _exit(EXIT_SUCCESS);
 }
-
-char **fileReader(char *filepath) {
-    int lines_allocated = 1024;
-    int max_line_len = 1024;
-
-    /* Allocate lines of text */
-    char **words = (char **) malloc(sizeof(char *) * lines_allocated);
-    if (words == NULL) {
-        fprintf(stderr, "Out of memory (1).\n");
-        exit(1);
-    }
-
-    FILE *fp = fopen(filepath, "r");
-    if (fp == NULL) {
-        fprintf(stderr, "ErrorR opening file.\n");
-        exit(2);
-    }
-    int i;
-    for (i = 0; 1; i++) {
-        int j;
-
-        /* Have we gone over our line allocation? */
-        if (i >= lines_allocated) {
-            int new_size;
-
-            /* Double our allocation and re-allocate */
-            new_size = lines_allocated * 2;
-            words = (char **) realloc(words, sizeof(char *) * new_size);
-            if (words == NULL) {
-                fprintf(stderr, "Out of memory.\n");
-                exit(3);
-            }
-            lines_allocated = new_size;
-        }
-        /* Allocate space for the next line */
-        words[i] = malloc(max_line_len);
-        if (words[i] == NULL) {
-            fprintf(stderr, "Out of memory (3).\n");
-            exit(4);
-        }
-        if (fgets(words[i], max_line_len - 1, fp) == NULL)
-            break;
-
-        /* Get rid of CR or LF at end of line */
-        for (j = strlen(words[i]) - 1; j >= 0 && (words[i][j] == '\n' || words[i][j] == '\r'); j--);
-        words[i][j + 1] = '\0';
-    }
-    /* Close file */
-    fclose(fp);
-
-    int j;
-    for (j = 0; j < i; j++)
-        printf("%s\n", words[j]);
-
-    /* Good practice to free memory */
-//    for (;i>=0;i--)
-//        free(words[i]);
-//    free(words);
-    return words;
-}
-
