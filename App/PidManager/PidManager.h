@@ -7,6 +7,7 @@
 
 #endif //PACK_PIDMANAGER_H
 
+// TODO: provide nesting and node navigation (maybe one day)
 
 struct upid {
     int nr;                     // the PID value

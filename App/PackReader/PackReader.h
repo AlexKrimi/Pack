@@ -15,8 +15,9 @@
 
 #include <string.h>
 
+#include "../Container/Container.h"
+
 #define STACK_SIZE (1024 * 1024)
-#define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))
 
 #define NAME "#NAME"
 #define RUN "#RUN"
@@ -40,11 +41,10 @@ int run_mode_process(char *line);
 
 int iso_mode_process(char *img_filepath, char *container_name);
 
-int net_mode_process(char *ip_address_host_veth0, char *ip_address_guest_veth1);
-
-int net_mode_process_host(char *ip_address_host_veth0);
+int net_mode_process_host(pid_t child_pid, char *ip_address_host_veth0);
 
 int net_mode_process_guest(char *ip_address_guest_veth1);
+
 
 int name_mode_process(char *name);
 
@@ -52,4 +52,8 @@ int usr_mode_process();
 
 int env_mode_process();
 
-int cgroup_mode_process();
+int cgroup_mode_process(pid_t child_pid);
+
+struct Container read_as_host(char *pack_filepath, struct Container container);
+
+int read_as_guest(char* pack_filepath);

@@ -4,14 +4,17 @@
 
 #endif //PACK_CONTAINER_H
 
+#pragma once
 
-struct Container{
+
+struct Container {
     int network;
     int isolate;
-    char* name;
-    char* user;
+    char host_ip[16];
+    char guest_ip[16];
+    char *name;
+    char *user;
+    char *location;
 };
 
-
-struct Container* new_container(char* name, char* user, int network, int isolate);
-struct Container* new_container_(int network, int isolate);
+struct Container new_container();

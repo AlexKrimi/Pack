@@ -1,17 +1,15 @@
 #NAME
-#Pack.
+PackK
 #NET
-#10.1.1.1/24
-#10.1.1.2/24
+10.1.1.1
+10.1.1.3
 #ISO
-#/home/alex/Workspace/Pack
+/home/alex/Workspace/Pack
 #RUN
 echo THIS IS DONE IN CHILD PACKFILE :
-apt-get update
-apt-get install sysbench
-sysbench --test=cpu --cpu-max-prime=20000 run
+#apt-get update
+#apt-get install sysbench
+#sysbench --test=cpu --cpu-max-prime=20000 run
 ifconfig
 ps aux
 #bash
-echo Welcome to Pack.
-echo Your Pack. is specified in the Packfile
