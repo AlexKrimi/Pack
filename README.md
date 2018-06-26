@@ -2,6 +2,10 @@
 
 [![N|Solid](http://i68.tinypic.com/2wcmluw.png)](https://drive.google.com/drive/folders/1g9kvVnblG2zZKaklLtMA5IDC51vtb72r?usp=sharing)
 ## [Pack ready container](https://drive.google.com/drive/folders/1g9kvVnblG2zZKaklLtMA5IDC51vtb72r?usp=sharing)
+run this one with
+```sh
+sudo ./container
+```
 
 The LIGHTWEIGHTEST containers ever
 
