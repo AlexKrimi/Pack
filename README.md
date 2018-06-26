@@ -2,7 +2,7 @@
 
 [![N|Solid](http://i68.tinypic.com/2wcmluw.png)](https://drive.google.com/drive/folders/1g9kvVnblG2zZKaklLtMA5IDC51vtb72r?usp=sharing)
 ## [Pack ready container](https://drive.google.com/drive/folders/1g9kvVnblG2zZKaklLtMA5IDC51vtb72r?usp=sharing)
-run this one with
+run ready container one with
 ```sh
 sudo ./container
 ```
@@ -32,7 +32,7 @@ The table below lists all of them implemented so far:
 | #ISO | one line, the (full) location of where you mount your Pack.container. e.g. `/home/anna/Pack`|
 | #NET | two lines, each of which is IP address. *first* - *host* vnet0 device, *second* - *guest* vnet1 device. |
 | #RUN | Any amount of lines which are bash commands will be executes inside your Pack.container. e.g. `apt -y install net-tools && ifconfig` |
-| #CGROUP | TBD |
+| #CGROUP | Just leave it blank. This tag will make all the magic without extra parameters |
 | #ENV | TBD |
 | #USR | TBD |
 
