@@ -28,9 +28,9 @@ The table below lists all of them implemented so far:
 
 | Mode | After this line you specify... |
 | ------ | ------ |
-| #NAME |  your container name, which is also name of your image (*.img) file name. If you write several lines with names, the last non-blank line will be accepted as name. If not specified, by default it is "container"|
-| #ISO | one line, the (full) location of where you mount your Pack.container. e.g. `/home/anna/Pack`|
-| #NET | two lines, each of which is IP address. *first* - *host* vnet0 device, *second* - *guest* vnet1 device. |
+| #NAME |  your container name, which is also name of your image (*.img) file name. If you write several lines with names, the last non-blank line will be accepted as name. If not specified, by default it is "container"(May be still mockup data intead)|
+| #ISO | one line, the (full) location of where you mount your Pack.container. e.g. `/home/anna/Pack`(May be still mockup data intead)|
+| #NET | two lines, each of which is IP address. *first* - *host* vnet0 device, *second* - *guest* vnet1 device. (May be still mockup data intead)|
 | #RUN | Any amount of lines which are bash commands will be executes inside your Pack.container. e.g. `apt -y install net-tools && ifconfig` |
 | #CGROUP | Just leave it blank. This tag will make all the magic without extra parameters |
 | #ENV | TBD |
