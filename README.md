@@ -1,7 +1,7 @@
 # Pack
 
-[![N|Solid](http://i68.tinypic.com/2wcmluw.png)](http://www.packcontainer.tk/)
-## [Pack website](http://www.packcontainer.tk/)
+[![N|Solid](http://i68.tinypic.com/2wcmluw.png)](https://drive.google.com/drive/folders/1g9kvVnblG2zZKaklLtMA5IDC51vtb72r?usp=sharing)
+## [Pack ready container](http://www.packcontainer.tk/)
 
 The LIGHTWEIGHTEST containers ever
 
@@ -11,9 +11,9 @@ The LIGHTWEIGHTEST containers ever
 
 # Quick Start
 
-cd to the directory with Pack sources and start one of examples with
+cd to the directory with unzipped Pack source code and start container with
 ```sh
-sudo bash SimpleExample/run.sh
+sudo bash run.sh
 ```
 
 ## Packfile
